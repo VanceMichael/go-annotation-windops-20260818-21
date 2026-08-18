@@ -14,7 +14,7 @@ func EvaluateRetryDoesNotRepeatCommittedStep(ctx Context) (Result, error) {
 	pending := make([]string, 0, len(steps))
 	for _, step := range steps {
 		state := completed[step]
-		terminal := state == "applied"
+		terminal := state == "committed" || state == "applied"
 		if !terminal {
 			pending = append(pending, step)
 		}
